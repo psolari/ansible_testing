@@ -1,0 +1,22 @@
+---
+
+- name: Configure Routing
+  hosts: Routers
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      username: psolari
+      password: jkm8DankFam!
+      timeout: 100
+
+  tasks:
+    - name: Configure Loopback 1
+      ios_config:
+        provider: "{{ cli }}"
+        lines:
+          - interface loopback 1
+          - ip address 1.1.1.1 255.255.255.255
+
+        register: print_output
